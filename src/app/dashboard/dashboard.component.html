@@ -1,0 +1,111 @@
+<div class="contenedor">
+  <div class="dashboard">
+    <img src="assets/menu.svg" alt="">
+    <div class="menu">
+      <ul>
+        <div class="ip">
+          <div class="pregunta">
+            <label for="">Servidor</label>
+            <input type="text" id="ip" placeholder="192.168.00.15">
+          </div>
+          <button *ngIf="ip == ''" id="set-btn" type="button" (click)="setIP()">SET</button>
+          <button *ngIf="ip != ''" id="set-btn" type="button" (click)="leaveIP()">LEAVE</button>
+        </div>
+        <li [class.active]="mostrar" (click)="openB()">Formularios creados</li>
+        <li [class.active]="crear" (click)="openA()">Crear un nuevo formulario</li>
+        <li (click)="goTo()">Regresar al lobby</li>
+      </ul>
+    </div>
+  </div>
+
+  <section>
+    <div class="titulos">
+      <h1 *ngIf="crear">Crear un formulario nuevo</h1>
+      <h2 *ngIf="mostrar">Tus formularios</h2>
+    </div>
+
+    <div *ngIf="crear">
+
+      <form [formGroup]="formulario" (ngSubmit)="obtenerValor()">
+
+        <div class="pregunta">
+          <label for="">Titulo o Tema del Cuestionario</label>
+          <input type="text" formControlName="titulo">
+        </div>
+
+        <div formArrayName="preguntas">
+          <div *ngFor="let pregunta of obtenerPreguntas(); let i = index">
+            <button type="button" id="del-btn" (click)="eliminarPregunta(i)">X</button>
+            <!--<app-formulario [pregunta]="pregunta" [index]="i"></app-formulario>-->
+            <div [formGroupName]="i">
+              <div class="pregunta">
+                <label for="">Pregunta No. {{i+1}} :</label>
+                <input type="text" formControlName="pregunta">
+              </div>
+
+              <div class="pregunta">
+                <label for="">Multimedia:</label>
+                <select name="" id="" formControlName="multimedia">
+                  <option value="">No</option>
+                  <option value="image">Imagen (JPG, GIF, SVG)</option>
+                  <option value="video">Video (MP4)</option>
+                  <option value="audio">Audio (MP3, WAV)</option>
+                </select>
+              </div>
+
+              <div class="pregunta" *ngIf="formulario.value.preguntas[i].multimedia !== ''">
+                <label for="">Archivo</label>
+                <input type="file" accept="{{formulario.value.preguntas[i].multimedia}}/*" formControlName="file" (change)="onFileChange($event,i)">
+              </div>
+
+              <div class="pregunta">
+                <label for="">Respuestas</label>
+                <small>Respuesta | Valor de la respuesta </small>
+              </div>
+
+              <div formArrayName="opciones">
+                <div *ngFor="let opcion of obtenerOpciones(i); let i = index">
+                  <div [formGroupName]="i">
+                    <div class="opciones">
+                      <label for="">{{opc[i]}}</label>
+                      <input type="text" formControlName="opcion">
+                      <input type="number" formControlName="valor">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn" type="button" (click)="agregarOpcion(i)" *ngIf="contadores[i] < maxOpciones">
+                <img src="assets/add.svg" alt="">
+              </button>
+
+              <div class="pregunta">
+                <label for="">Respuesta</label>
+                <small>Anotar el inciso</small>
+                <input type="text" formControlName="respuesta" placeholder="a">
+              </div>
+              <hr>
+              <br>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" (click)="agregarPregunta()">Agregar pregunta</button>
+        <button type="submit">Subir</button>
+      </form>
+
+    </div>
+
+    <div *ngIf="mostrar">
+      <div *ngFor="let cu of formularios?.cuestionario">
+          <div class="cuestionario" (click)="del(cu)">
+            {{cu}}
+            <img src="assets/del2.svg" alt="">
+          </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<app-loading *ngIf="loading"></app-loading>

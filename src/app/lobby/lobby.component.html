@@ -1,0 +1,54 @@
+<div class="contenedor">
+
+  <div *ngIf="!initDone; else elseBlock;" class="server">
+    <h1>Unete al servidor</h1>
+    <small>Pregunta a tu profesor por la IP</small>
+    <input type="text" [(ngModel)]="ip">
+    <button (click)="enterIP()">Unirse al servidor </button>
+  </div>
+
+  <ng-template #elseBlock>
+
+    <form [formGroup]="form" (ngSubmit)="joinRoom()" *ngIf="joined">
+      <h1>Elige tu usuario</h1>
+      <input type="text" formControlName="username">
+      <button type="submit">Entrar</button>
+    </form>
+
+    <div *ngIf="!joined" class="juego">
+      <h1 class="phone">Bienvenido: {{auxName}}</h1>
+      <button id="exit-btn" (click)="exitRoom()">Salir</button>
+      <div *ngIf="pregunta != null" class="pregunta">
+
+        <div class="audio" *ngIf="pregunta.multimedia == 'audio'">
+          <audio controls id="audio">
+            <source [src]="pregunta?.file">
+          </audio>
+        </div>
+        <div class="video" *ngIf="pregunta.multimedia == 'video'">
+          <video controls width="400" height="300" id="video">
+            <source [src]="pregunta?.file">
+          </video>
+        </div>
+        <div class="image" *ngIf="pregunta.multimedia == 'image'">
+          <img [src]="pregunta?.file" alt="" type="image/*">
+        </div>
+
+        <div class="texto">{{pregunta.pregunta}}</div>
+
+        <div class="opciones">
+          <div *ngFor="let re of pregunta.opciones; let i = index">
+            <button [disabled]="preguntaContestada[i]" class="btn-opc" (click)="responder(re.opcion,re.valor)"> {{opc[i]}} {{re.opcion}}</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </ng-template>
+</div>
+
+<div class="end" *ngIf="juegoStatus">
+  <h1>Juego terminado</h1>
+  <h3>Revisa tus resultados en la pantalla de tu profesor</h3>
+</div>

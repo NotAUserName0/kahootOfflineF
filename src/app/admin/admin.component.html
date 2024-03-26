@@ -1,0 +1,100 @@
+<div *ngIf="!initDone; else elseBlock;" class="initBlock">
+  <h3>Introduce la IP</h3>
+  <input type="text" [(ngModel)]="ip">
+  <button (click)="enterIP()" type="button">Unirse al servidor </button>
+  <button (click)="goTo('dashboard')" type="button">Crear Formulario</button>
+</div>
+
+<ng-template #elseBlock>
+
+  <div class="contenedor">
+
+    <h1>Bienvenido Administrador</h1>
+    <small>Si tienes dudas consulta el manual</small>
+
+    <select name="" id="" [(ngModel)]="selector" (change)="seleccion($event)" [disabled]="block">
+      <option value="">Selecciona Formulario</option>
+      <option *ngFor="let cuestionario of cuestionarios" [value]="cuestionario">
+        {{cuestionario}}</option>
+    </select>
+    <button *ngIf="block" (click)="cambiar()">Cambiar</button>
+
+    <div *ngIf="block">
+
+      <button (click)="crearServidor()" *ngIf="!serverStatus">Crear servidor</button>
+      <button (click)="iniciarJuego()" *ngIf="serverStatus && init">Iniciar cuestionario</button>
+
+      <div *ngIf="!init">
+        <button (click)="terminar()" *ngIf="serverStatus">Terminar</button>
+      </div>
+    </div>
+
+    <div class="inGame" *ngIf="juegoStatus">
+      <h3>Jugadores Listos</h3>
+      <ul class="tabla-usuarios">
+        <li class="encabezado">
+          <span class="username">Jugador</span>
+          <span class="puntaje">Puntaje</span>
+        </li>
+        <li *ngFor="let user of users">
+          <span class="username">{{ user.username }}</span>
+          <span class="puntaje">{{ user.puntaje }}</span>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="block" *ngIf="!juegoStatus">
+
+      <div class="ganadores">
+        <div class="podio">
+          <ul>
+            <li class="primero">
+              Segundo lugar
+              <div class="dato">
+                <span class="username">{{ users[1]?.username }}</span>
+              </div>
+            </li>
+            <li class="segundo">
+              Primer Lugar
+              <div class="dato">
+                <span class="username">{{ users[0]?.username }}</span>
+              </div>
+            </li>
+            <li class="tercero">
+              Tercer lugar
+              <div class="dato">
+                <span class="username">{{ users[2]?.username }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <h1>RESTO DE JUGADORES</h1>
+
+        <ul class="tabla-usuarios">
+          <li class="encabezado">
+            <span class="username">Usuario</span>
+            <span class="puntaje">Puntaje</span>
+          </li>
+          <li *ngFor="let user of users.slice(3)">
+            <span class="username">{{ user?.username }}</span>
+            <span class="puntaje">{{ user?.puntaje }}</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="contador != 0" class="alert">
+  <h1>Restante</h1>
+  <br>
+  <h1>{{contador}}</h1>
+  <br>
+  <div>La respuesta correcta es: {{respuestaCorrecta}}</div>
+</div>
+
+
+<app-loading *ngIf="loading"></app-loading>

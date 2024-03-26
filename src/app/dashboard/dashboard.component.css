@@ -1,0 +1,196 @@
+.contenedor{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  min-width: 100%;
+}
+
+.dashboard{
+  width: 100px;
+  height: 100%;
+  z-index: 10;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #460000;
+}
+
+.menu{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -5;
+}
+
+.dashboard .menu{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.dashboard:hover .menu{
+  z-index: 10;
+  pointer-events: all;
+  opacity: 1;
+}
+
+.dashboard:hover{
+  width: 25%;
+}
+
+.dashboard img{
+  margin-top: 20px;
+  width: 30px;
+  height: 30px;
+  opacity: 1;
+  filter: invert(1);
+  transition: opacity 0.1s ease-in-out;
+}
+
+.dashboard:hover img{
+  opacity: 0;
+}
+
+ul{
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+li{
+  padding: 15px 5px;
+  color: white;
+}
+
+li:hover{
+  background-color: white;
+  color: #460000;
+}
+
+.active{
+  background-color: white;
+  color: #460000;
+}
+
+.contenedor section{
+  width: 100%;
+  min-height: 100%;
+  padding-left: 15%;
+}
+
+.titulos{
+  color: #460000;
+  padding-left: 40px;
+  font-size: 25px;
+}
+
+form{
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px;
+  color: #460000;
+}
+
+.pregunta{
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn{
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+label{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+input, select{
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #460000;
+}
+
+input:focus, select:focus{
+  outline: none;
+  border: 1px solid #460000;
+}
+
+button{
+  cursor: pointer;
+  width: 30%;
+  padding: 12px;
+  border-radius: 5px;
+  margin: 15px 0;
+  background:#460000;
+  border: none;
+  color: white;
+}
+
+button:hover{
+  background: white;
+  color: #460000;
+  border: 1px solid #460000;
+}
+
+#del-btn{
+  background-color: #460000;
+  color: white;
+  width: 35px;
+  text-align: center;
+}
+
+#del-btn:hover{
+  background-color: white;
+  color: #460000;
+}
+
+.ip{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-bottom: 50px;
+}
+
+#set-btn{
+  border: 1px solid white;
+  background-color: white;
+  color: #460000;
+  margin: 0 auto;
+}
+
+.cuestionario{
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #460000;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cuestionario:hover{
+  transform: scale(1.1);
+}
+
+.cuestionario img{
+  width: 30px;
+  height: 30px;
+}

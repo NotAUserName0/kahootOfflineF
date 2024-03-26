@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+
+/* Añadir estilos específicos para navegadores con prefijos */
+/* Chrome, Safari, Edge, Opera */
+*::-webkit-scrollbar {
+  display: none !important; /* Oculta la barra de desplazamiento */
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none !important; /* Oculta la barra de desplazamiento */
+  -ms-overflow-style: none !important;
+}
+
+html{
+  height:100%;
+}
+
+body { margin: 0; height: 100%; }

@@ -1,0 +1,256 @@
+.contenedor{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.server{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  border: 1px solid #460000;
+  border-radius: 10px;
+}
+
+h1{
+  color: #460000;
+  text-align: center;
+}
+
+button{
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
+  margin: 15px 0;
+  background:#460000;
+  border: none;
+  color: white;
+}
+
+button:hover{
+  background: white;
+  color: #460000;
+  border: 1px solid #460000;
+}
+
+input{
+  width: 30%;
+  padding: 12px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 5px;
+  margin: 15px 0;
+  border: 1px solid #460000;
+  color: #460000;
+}
+
+select{
+  margin-top: 20px;
+  width: 20%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #460000;
+}
+
+select:focus{
+  outline: none;
+  border: 1px solid #460000;
+}
+
+form{
+  width: 20%;
+  border: 1px solid #460000;
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 15px;
+}
+
+form input{
+  width: 100%;
+}
+
+form button{
+  width: 100%;
+}
+
+.juego{
+  width: 90%;
+  height: 90%;
+  border: 1px solid #460000;
+  border-radius: 10px;
+  position: relative;
+}
+
+.juego h1{
+  margin-left: 20px;
+}
+
+.juego #exit-btn{
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.pregunta{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.texto{
+  font-size: 40px;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.image img{
+  width: 400px;
+  height: 300px;
+}
+
+.opciones{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+}
+
+.btn-opc{
+  width: 300px;
+  padding: 35px;
+  height: 100%;
+  margin: 0;
+}
+
+.btn-opc:disabled{
+  border: 1px solid #460000;
+  background-color: white;
+  color: #460000;
+  cursor: default;
+}
+
+.end{
+  position:absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(52, 52, 52, 0.784);
+  display: fixed;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  z-index: 5;
+  color: white;
+  text-align: center;
+}
+
+.end h1{
+  color: white;
+  font-size: 80px;
+}
+
+.end h3{
+  font-size: 40px;
+}
+
+.end small{
+  font-size: 30px;
+}
+
+#btn-final{
+  width: 200px;
+  padding: 25px;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 749px) {
+
+  h1{
+    font-size: 25px;
+  }
+
+  .contenedor{
+    width: 100%;
+    min-height: fit-content;
+  }
+
+  form{
+    width: 50%;
+  }
+
+  .server{
+    width: 80%;
+  }
+
+  .juego{
+    width: 90%;
+    height: fit-content;
+  }
+
+  .image img{
+    width: 250px;
+    height: 250px;
+  }
+
+  .opciones{
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+  }
+
+  .texto{
+    font-size: 25px;
+  }
+
+  .opciones{
+    margin-bottom: 10px;
+  }
+
+  .btn-opc{
+    padding: 25px;
+  }
+
+  .video video{
+    width: 300px;
+    height: 250px;
+  }
+
+  .pregunta{
+    margin-top: 40px;
+  }
+
+  .phone{
+    font-size: 25px;
+  }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 1600px){
+
+  .texto{
+    font-size: 30px;
+  }
+
+  .image img{
+    width: 300px;
+    height: 250px;
+  }
+
+  .btn-opc{
+    padding: 30px;
+  }
+
+  .video video{
+    width: 300px;
+    height: 250px;
+  }
+
+}
