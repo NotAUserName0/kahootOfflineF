@@ -1,27 +1,32 @@
-# AppCuestionario
+# Aplicacion para cuestionarios tipo Kahoot de forma Offline
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+El proyecto fue elaborado para el cumplimiento del Servicio Social
 
-## Development server
+## Desarrollador
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Fermin Jimenez Garcia
 
-## Code scaffolding
+[Portafolio](https://notausername0.github.io/Portafolio/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Estudiante del IPN - Escuela Superior de Computo(ESCOM)
 
-## Build
+## Funcionamiento
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+El proyecto requiere esencialmente lo siguiente:
 
-## Running unit tests
+1. Tener el backend y el frontend
+2. Conocer la ip del sistema donde se ejecutara el software
+3. Una red LAN generada por una Laptop o una Smartphone
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## ¿Como descargar?
 
-## Running end-to-end tests
+1. Se necesita hacer es un `git clone` a la branch correspondiente en este repositorio.
+2. Te quedaran 2 carpetas(front y back) en ambas se debe abrir el CMD o terminal y hacer el siguiente comando `npm i`
+3. Para correr el front el cual sera la vista para el juego se necesita user el siguiente comando en la CMD o terminal `ng serve --host tu_ip`
+4. Para correr el back el cual dara funcionamiento se necesita usar el siguiente comando en la CMD o terminal `node app.js`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ¿Como funciona?
 
-## Further help
+La apliaacion de Angular se conecta por una IP al servidor y el servidor crea automaticamente las carpetas necesarias para el registro de formularios y posteriormente el uso de los mismos, mientras que el front cuenta con 2 perfiles uno protegido por una contraseña mostrada en el manual de usuario y el documento tecnico.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+En esta se especifica para que sirve cada boton y como socket.io interactua con todo el sistema para que el funcionamiento sea correcto
