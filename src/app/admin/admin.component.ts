@@ -27,7 +27,7 @@ export class AdminComponent {
   finalizado = false //false
   contador = 0
   ///
-  ip: string = "localhost"
+  ip: string = ""
   initDone = false //inicia lo demas ya con ip, false
   respuestaCorrecta = ""
   loading:boolean = false

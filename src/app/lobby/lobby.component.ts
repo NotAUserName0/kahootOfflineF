@@ -15,7 +15,7 @@ export class LobbyComponent {
   pregunta: Pregunta;
   socket: any;
   initDone = false; //false
-  ip: string = "localhost"
+  ip: string = ""
   preguntaContestada: any
   opc = ['a) ', 'b) ', 'c) ', 'd) ']
   juegoStatus: boolean = false
