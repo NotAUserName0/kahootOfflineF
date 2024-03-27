@@ -88,7 +88,7 @@ io.on('connection', (socket) => {
     socket.emit('connectedUsers', connectedUsers);
 
     //GAME LOGIC - ADMIN
-    socket.on('iniciarJuego',async (data) => { //inicia el juego y manda la primer pregunta del archivo seleccionado
+    socket.on('iniciarJuego', async (data) => { //inicia el juego y manda la primer pregunta del archivo seleccionado
         cuestionarioSeleccionado = ""
         pregunta = 0
         console.log(data)
@@ -127,10 +127,10 @@ io.on('connection', (socket) => {
                     });
                 } else { //si no mando resultado a el cliente y avizo de finalizado al admin
                     console.log('Juego terminado')
-                    io.to('admin').emit('juegoTerminado',()=>{
+                    io.to('admin').emit('juegoTerminado', () => {
                         io.to('client').emit('finalizando')
                     })
-                    
+
                 }
                 respondidas = 0
             }, 22000)
@@ -191,35 +191,41 @@ app.post('/crearCuestionario', upload.any(), (req, res) => { //crea un cuestiona
 app.get('/cuestionarios', (req, res) => { //obtiene todos los cuestionarios
     try {
         const cuestionariosFolder = path.join(__dirname, 'cuestionarios');
+        console.log(cuestionariosFolder);
 
         fs.readdir(cuestionariosFolder, (err, files) => {
             if (err) {
-                console.error('Error al leer la carpeta cuestionarios:', err);
-                res.status(500).send('Error interno del servidor');
-                return;
+                fs.mkdir(cuestionariosFolder, (err) => {
+                    if (err) {
+                        throw new Error('Error al crear la carpeta: ' + err.message);
+                    }else{
+                        res.status(200).json({ message: 'Carpeta creada, no hay cuestionarios' });
+                    }
+                });
+            } else {
+                // Filtrar los nombres de archivo eliminando las extensiones
+                const nombresCuestionarios = files.map(file => path.parse(file).name);
+                // Enviar los nombres de los cuestionarios como respuesta
+                res.json({ cuestionario: nombresCuestionarios });
             }
-    
-            // Filtrar los nombres de archivo eliminando las extensiones
-            const nombresCuestionarios = files.map(file => path.parse(file).name);
-            // Enviar los nombres de los cuestionarios como respuesta
-            res.json({ cuestionario: nombresCuestionarios });
         })
+
     } catch (e) {
-        res.status(500).json({ message: e.message })
+        res.status(500).json({ message: e.message });
     }
 })
 
 app.get('/cuestionario/:titulo', (req, res) => { //obtiene un cuestionario en especifico
     try {
         const titulo = req.params.titulo
-        const cuestionarios = JSON.parse(fs.readFileSync('cuestionarios/'+titulo+'.json'));
+        const cuestionarios = JSON.parse(fs.readFileSync('cuestionarios/' + titulo + '.json'));
 
-        const obj = Object.assign({},cuestionarios)
+        const obj = Object.assign({}, cuestionarios)
 
         const filePromises = [];
 
         for (let i = 0; i < obj.preguntas.length; i++) {
-            console.log("analizando :"+ obj.preguntas[i].file)
+            console.log("analizando :" + obj.preguntas[i].file)
             if (obj.preguntas[i].file !== "") {
                 filePromises.push(new Promise((resolve, reject) => {
                     fs.readFile('uploads/' + obj.preguntas[i].file, (err, data) => {
@@ -231,7 +237,7 @@ app.get('/cuestionario/:titulo', (req, res) => { //obtiene un cuestionario en es
                 }));
             }
         }
-        
+
         Promise.all(filePromises)
             .then(() => {
                 res.status(200).send(obj);
@@ -247,12 +253,12 @@ app.get('/cuestionario/:titulo', (req, res) => { //obtiene un cuestionario en es
     }
 })
 
-app.delete('/eliminarCuestionario/:titulo', (req, res)=>{
-    try{
+app.delete('/eliminarCuestionario/:titulo', (req, res) => {
+    try {
 
         const titulo = req.params.titulo
 
-        fs.unlink('cuestionarios/'+titulo+'.json', (err) => {
+        fs.unlink('cuestionarios/' + titulo + '.json', (err) => {
             if (err) {
                 console.error('Error al eliminar el archivo:', err);
                 res.status(500).send('Error interno del servidor al eliminar el archivo');
@@ -262,7 +268,7 @@ app.delete('/eliminarCuestionario/:titulo', (req, res)=>{
             res.status(200).json({ message: 'Cuestionario eliminado' });
         })
 
-    }catch(e){
+    } catch (e) {
         res.status(500).json({ message: e.message })
     }
 })
@@ -276,7 +282,7 @@ app.get('/isConnected', (req, res) => {
 })
 
 app.get('/pruebaCuestionario/:titulo', async (req, res) => {
-    
+
     const data = await obtenerFormulario(req.params.titulo)
 
     console.log(data.preguntas[0])
