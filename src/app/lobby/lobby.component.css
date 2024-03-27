@@ -230,6 +230,20 @@ form button{
 
   .phone{
     font-size: 25px;
+    text-align: left;
+  }
+
+  .end h1{
+    color: white;
+    font-size: 60px;
+  }
+
+  .end h3{
+    font-size: 25px;
+  }
+
+  .end small{
+    font-size: 18px;
   }
 }
 
@@ -251,6 +265,24 @@ form button{
   .video video{
     width: 300px;
     height: 250px;
+  }
+
+  .phone{
+    font-size: 30px;
+    text-align: left;
+  }
+
+  .end h1{
+    color: white;
+    font-size: 60px;
+  }
+
+  .end h3{
+    font-size: 25px;
+  }
+
+  .end small{
+    font-size: 18px;
   }
 
 }

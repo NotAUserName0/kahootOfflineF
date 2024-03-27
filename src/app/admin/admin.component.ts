@@ -27,7 +27,7 @@ export class AdminComponent {
   finalizado = false //false
   contador = 0
   ///
-  ip: string = ""
+  ip: string = "localhost"
   initDone = false //inicia lo demas ya con ip, false
   respuestaCorrecta = ""
   loading:boolean = false
@@ -98,6 +98,9 @@ export class AdminComponent {
     this.dataService.obtenerFormularios(this.ip).subscribe((data: any) => {
       this.cuestionarios = data.cuestionario;
       this.loading = false
+    },err=>{
+      this.loading = false
+      alert("No hay cuestionarios disponibles")
     })
   }
 

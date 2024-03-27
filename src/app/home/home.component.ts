@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  pass:string = ""; //admin
+  pass:string = "admin"; //admin
 
   constructor(private router: Router) { }
 
